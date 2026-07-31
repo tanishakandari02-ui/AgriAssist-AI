@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+// Check Login
+const token = localStorage.getItem("token");
+
+if (!token) {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+
+// Verify JWT with backend
+fetch("http://localhost:5000/api/profile", {
+    headers: {
+        Authorization: "Bearer " + token
+    }
+})
+.then(res => {
+    if (res.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        alert("Session expired. Please login again.");
+        window.location.href = "login.html";
+    }
+})
+.catch(err => console.log(err));
+</script>
+
+<div class="container">
+
+    <h1>🌾 Farmer Dashboard</h1>
+
+    <div class="crop-card">
+        <h3>👤 Farmer Profile</h3>
+        <p><strong>Name:</strong> <span id="username">Loading...</span></p>
+        <p><strong>Status:</strong> Active</p>
+    </div>
+
+    <div class="crop-card">
+        <h3>📊 Farm Summary</h3>
+       <p><strong>Total Crops:</strong> <span id="totalCrops">0</span></p>
+        <p><strong>Weather:</strong> <span id="weather">Loading...</span></p>
+    </div>
+
+    <div class="crop-card">
+        <h3>🔗 Quick Access</h3>
+        <p><a href="crop.html">🌾 Crop Information</a></p>
+        <p><a href="weather.html">🌦 Weather Updates</a></p>
+        <p><a href="scheme.html">🏛 Government Schemes</a></p>
+        <p><a href="market.html">🛒 Farmer Marketplace</a></p>
+    </div>
+
+    <div class="crop-card">
+        <h3>💡 Farming Tips</h3>
+        <p>Use soil testing before applying fertilizers.</p>
+        <p>Regularly monitor crops for diseases and pests.</p>
+    </div>
+
+    <br>
+
+    <a href="homepage.html">
+        <button>🏠 Home</button>
+    </a>
+
+    <button onclick="logout()">🚪 Logout</button>
+
+</div>
+
+<script>
+
+// Fetch user profile
+fetch("http://localhost:5000/api/profile", {
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+    }
+})
+.then(res => res.json())
+.then(data => {
+
+    if (data.success) {
+     document.getElementById("username").innerText = data.user.name;
+    }
+
+})
+.catch(err => console.log(err));
+
+// Load Total Crops
+async function loadSummary() {
+
+    const response = await fetch("http://localhost:5000/api/crops");
+    const crops = await response.json();
+
+    document.getElementById("totalCrops").innerText = crops.length;
+}
+
+loadSummary();
+
+// Logout
+function logout(){
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    alert("Logged Out Successfully");
+
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

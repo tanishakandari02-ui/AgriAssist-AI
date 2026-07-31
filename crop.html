@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+const token = localStorage.getItem("token");
+
+// Agar token nahi hai to login page par bhejo
+if (!token) {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+
+// Backend se JWT verify karo
+fetch("http://localhost:5000/api/profile", {
+    method: "GET",
+    headers: {
+        "Authorization": "Bearer " + token
+    }
+})
+.then(async (res) => {
+    if (res.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        alert("Session expired. Please login again.");
+
+        window.location.href = "login.html";
+    }
+})
+.catch((err) => {
+    console.log(err);
+});
+</script>
+
+<div class="container">
+
+    <h1>🌾 Crop Information</h1>
+
+    <hr>
+
+<h2>🌾 Crop Management</h2>
+
+<input type="hidden" id="cropId">
+
+<label>Crop Name</label><br>
+<input type="text" id="cropName" placeholder="Enter Crop Name">
+
+<br><br>
+
+<label>Season</label><br>
+<input type="text" id="season" placeholder="Enter Season">
+
+<br><br>
+
+<label>Description</label><br>
+<textarea id="description" rows="4" placeholder="Enter Description"></textarea>
+
+<br><br>
+
+<button onclick="saveCrop()">💾 Save Crop</button>
+
+<hr>
+
+<h2>📋 Crop List</h2>
+
+<div id="cropList">
+    <p>No crops found.</p>
+</div>
+
+    <hr>
+
+    <h2>🤖 AI Crop Disease Detection</h2>
+
+    <label>Crop Name</label><br>
+    <input type="text" id="crop" placeholder="Enter crop name">
+
+    <br><br>
+
+    <label>Symptoms</label><br>
+    <textarea id="symptoms" rows="5" placeholder="Enter crop symptoms"></textarea>
+
+    <br><br>
+
+    <button id="analyzeBtn" onclick="analyzeCrop()">Analyze</button>
+
+    <p id="loading" style="display:none;color:blue;">
+        ⏳ Analyzing... Please wait...
+    </p>
+
+    <div id="result"></div>
+
+    <p id="error" style="color:red;font-weight:bold;"></p>
+
+    <br>
+
+    <a href="homepage.html">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+<script>
+    const API = "http://localhost:5000/api/crops";
+   // Load all crops
+async function loadCrops() {
+
+    const response = await fetch(API);
+    const crops = await response.json();
+
+    const cropList = document.getElementById("cropList");
+
+    if (crops.length === 0) {
+        cropList.innerHTML = "<p>No crops found.</p>";
+        return;
+    }
+
+    cropList.innerHTML = "";
+
+    crops.forEach(crop => {
+
+        cropList.innerHTML += `
+        <div class="crop-card">
+
+            <h3>${crop.cropName}</h3>
+
+            <p><b>Season:</b> ${crop.season}</p>
+
+            <p>${crop.description}</p>
+
+            <button onclick='editCrop(
+                ${crop.id},
+                ${JSON.stringify(crop.cropName)},
+                ${JSON.stringify(crop.season)},
+                ${JSON.stringify(crop.description)}
+            )'>
+                ✏ Edit
+            </button>
+
+            <button onclick="deleteCrop(${crop.id})">
+                🗑 Delete
+            </button>
+
+        </div>
+        `;
+
+    });
+
+}
+    
+
+// Save Crop
+async function saveCrop(){
+
+    const id = document.getElementById("cropId").value;
+    const cropName = document.getElementById("cropName").value;
+    const season = document.getElementById("season").value;
+    const description = document.getElementById("description").value;
+    
+    if (!cropName.trim() || !season.trim() || !description.trim()) {
+    alert("Please fill all fields.");
+    return;
+}
+
+    const method = id ? "PUT" : "POST";
+    const url = id ? API + "/" + id : API;
+
+    await fetch(url,{
+        method:method,
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            cropName,
+            season,
+            description
+        })
+    });
+
+    document.getElementById("cropId").value="";
+    document.getElementById("cropName").value="";
+    document.getElementById("season").value="";
+    document.getElementById("description").value="";
+
+   loadCrops();
+
+if (id) {
+    alert("✅ Crop updated successfully!");
+} else {
+    alert("✅ Crop added successfully!");
+}
+
+}
+
+// Edit Crop
+function editCrop(id,name,season,description){
+
+    document.getElementById("cropId").value=id;
+    document.getElementById("cropName").value=name;
+    document.getElementById("season").value=season;
+    document.getElementById("description").value=description;
+
+}
+
+// Delete Crop
+async function deleteCrop(id){
+
+    if(!confirm("Delete this crop?")){
+        return;
+    }
+await fetch(API + "/" + id, {
+    method: "DELETE"
+});
+
+loadCrops();
+
+alert("🗑 Crop deleted successfully!");
+
+    loadCrops();
+
+}
+
+// Load crops automatically
+loadCrops();
+async function analyzeCrop() {
+
+    const crop = document.getElementById("crop").value;
+    const symptoms = document.getElementById("symptoms").value;
+    if (!crop.trim() || !symptoms.trim()) {
+    alert("Please enter crop name and symptoms.");
+    return;
+}
+
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
+    const error = document.getElementById("error");
+    const btn = document.getElementById("analyzeBtn");
+
+    loading.style.display = "block";
+    result.innerHTML = "";
+    error.innerHTML = "";
+
+    btn.disabled = true;
+    btn.innerText = "Analyzing...";
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/ai/disease", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                crop,
+                symptoms
+            })
+
+        });
+
+        const data = await response.json();
+
+        loading.style.display = "none";
+
+        btn.disabled = false;
+        btn.innerText = "Analyze";
+
+        if (data.error) {
+            error.innerHTML = data.error;
+            return;
+        }
+
+        result.innerHTML = `
+        <pre style="
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            margin:0;
+            font-family:Arial,sans-serif;
+        ">${data.result}</pre>`;
+
+    }
+
+    catch(err){
+
+        loading.style.display="none";
+
+        btn.disabled = false;
+        btn.innerText = "Analyze";
+
+        error.innerHTML="❌ Something went wrong.";
+
+    }
+
+}
+</script>
+
+</body>
+</html>

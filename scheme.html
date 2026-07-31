@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Government Schemes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🏛 Government Schemes</h1>
+
+    <div id="schemeList">
+    <p>Loading schemes...</p>
+</div>
+    <br>
+
+    <a href="homepage.html">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+<script>
+async function loadSchemes() {
+
+    const response = await fetch("http://localhost:5000/api/schemes");
+    const schemes = await response.json();
+
+    const schemeList = document.getElementById("schemeList");
+
+    schemeList.innerHTML = "";
+
+    schemes.forEach(scheme => {
+
+        schemeList.innerHTML += `
+            <div class="crop-card">
+                <h3>${scheme.title}</h3>
+                <p>${scheme.description}</p>
+            </div>
+        `;
+
+    });
+
+}
+
+loadSchemes();
+</script>
+
+</body>
+</html>

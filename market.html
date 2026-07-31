@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmer Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🛒 Farmer Marketplace</h1>
+
+    <div id="marketList">
+        <p>Loading market prices...</p>
+    </div>
+
+    <br>
+
+    <a href="homepage.html">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+<script>
+async function loadMarket() {
+
+    const response = await fetch("http://localhost:5000/api/market");
+    const markets = await response.json();
+
+    const marketList = document.getElementById("marketList");
+
+    marketList.innerHTML = "";
+
+    markets.forEach(item => {
+
+        marketList.innerHTML += `
+            <div class="crop-card">
+                <h3>${item.crop}</h3>
+                <p><strong>Price:</strong> ${item.price}</p>
+            </div>
+        `;
+
+    });
+
+}
+
+loadMarket();
+</script>
+
+</body>
+</html>

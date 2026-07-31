@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Updates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🌦 Weather Updates</h1>
+
+    <div class="crop-card">
+        <p>Temperature: <span id="temperature">Loading...</span></p>
+        <p>Humidity: <span id="humidity">Loading...</span></p>
+        <p>Condition: <span id="condition">Loading...</span></p>
+    </div>
+
+    <div class="crop-card">
+        <h3>Farmer Advisory</h3>
+        <p id="advisory">Loading...</p>
+    <br>
+
+    <a href="homepage.html">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+<script>
+async function loadWeather() {
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/weather");
+        const data = await response.json();
+
+        document.getElementById("temperature").innerText = data.temperature;
+        document.getElementById("humidity").innerText = data.humidity;
+        document.getElementById("condition").innerText = data.condition;
+        document.getElementById("advisory").innerText = data.advisory;
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+}
+
+loadWeather();
+</script>
+
+</body>
+</html>

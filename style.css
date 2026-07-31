@@ -1,0 +1,321 @@
+
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:#28a745;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+nav{
+    background:#333;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+}
+
+section{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:8px;
+    box-shadow:0 0 5px gray;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+input, textarea{
+    margin:10px 0;
+    padding:10px;
+}
+
+
+footer{
+    text-align:center;
+    background:#333;
+    color:white;
+    padding:15px;
+}
+.navbar{
+    background: #0a8f08;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul{
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.navbar ul li{
+    display: inline;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.crop-card{
+    background: #e8f5e9;
+    border: 1px solid #28a745;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+h1{
+    color: #28a745;
+}
+
+ul li{
+    margin: 8px 0;
+}
+
+ul li a{
+    color: #0a8f08;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover{
+    text-decoration: underline;
+}
+button{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:5px;
+}
+.container{
+    width:80%;
+    margin:20px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+/* Tablet */
+@media screen and (max-width:768px){
+
+    .container{
+        width:95%;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .navbar ul{
+        flex-direction:column;
+        text-align:center;
+        gap:10px;
+    }
+
+    nav a{
+        display:block;
+        margin:8px 0;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width:375px){
+
+    .container{
+        width:98%;
+        padding:10px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    .crop-card{
+        padding:10px;
+    }
+
+    button{
+        width:100%;
+    }
+
+    input{
+        width:100%;
+        box-sizing:border-box;
+    }
+}
+
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode .container{
+    background:#1e1e1e;
+    color:white;
+}
+
+.dark-mode .crop-card{
+    background:#2c2c2c;
+    border:1px solid #555;
+}
+
+.dark-mode h1{
+    color:#4caf50;
+}
+/* AI Result Box */
+#result{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid #28a745;
+    border-radius:8px;
+    background:#f8fff8;
+
+    max-width:100%;
+    max-height:400px;
+
+    overflow-x:auto;
+    overflow-y:auto;
+
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    line-height:1.6;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+
+.container{
+    width:90%;
+    padding:15px;
+}
+
+input,
+textarea,
+button{
+    width:100%;
+    margin-top:10px;
+    box-sizing:border-box;
+}
+
+.crop-card{
+    width:100%;
+    margin-bottom:15px;
+}
+
+h1,h2{
+    font-size:24px;
+}
+
+}
+
+/* Small Mobile */
+@media screen and (max-width:375px){
+
+.container{
+    width:95%;
+    padding:10px;
+}
+
+h1{
+    font-size:22px;
+}
+
+h2{
+    font-size:18px;
+}
+
+button{
+    font-size:15px;
+}
+
+}
+
+/* ---------- Responsive ---------- */
+
+*{
+    box-sizing: border-box;
+}
+
+img{
+    max-width:100%;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.crop-card{
+    width:100%;
+    margin-bottom:20px;
+}
+
+input,
+textarea,
+button{
+    width:100%;
+    max-width:450px;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* Tablet */
+
+@media (max-width:768px){
+
+h1{
+    font-size:32px;
+}
+
+.container{
+    width:95%;
+}
+
+}
+
+/* Mobile */
+
+@media (max-width:375px){
+
+h1{
+    font-size:24px;
+}
+
+.crop-card{
+    padding:15px;
+}
+
+button{
+    width:100%;
+}
+
+}
