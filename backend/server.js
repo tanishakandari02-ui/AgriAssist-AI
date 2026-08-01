@@ -34,13 +34,12 @@ app.use(passport.session());
 // Auth Routes with Rate Limiting
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/auth", authRoutes);
-app.use("/api/ai", aiRoutes);
-
 
 // Test Route
 app.get("/hello", (req, res) => {
   res.send("Hello Route Working");
 });
+
 
 // Protected Route
 app.get("/api/profile", authMiddleware, (req, res) => {
@@ -72,6 +71,6 @@ const PORT = process.env.PORT || 5000;
 console.log("JWT_SECRET:", process.env.JWT_SECRET);
 console.log("Gemini Key Loaded:", process.env.GEMINI_API_KEY?.substring(0, 5));
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
