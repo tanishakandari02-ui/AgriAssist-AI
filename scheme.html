@@ -24,7 +24,7 @@
 <script>
 async function loadSchemes() {
 
-    const response = await fetch("http://localhost:5000/api/schemes");
+    const response = await fetch("https://agriassist-backend-dxtr.onrender.com/api/schemes");
     const schemes = await response.json();
 
     const schemeList = document.getElementById("schemeList");

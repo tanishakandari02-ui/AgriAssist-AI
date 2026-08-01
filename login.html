@@ -17,7 +17,7 @@
 
 <br>
 
-<a href="http://localhost:5000/api/auth/google">
+<a href="https://agriassist-backend-dxtr.onrender.com/api/auth/google">
     <button type="button">Sign in with Google</button>
 </a>
 
@@ -35,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
     try {
 
-        const res = await fetch("http://localhost:5000/api/auth/login", {
+        const res = await fetch("https://agriassist-backend-dxtr.onrender.com/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

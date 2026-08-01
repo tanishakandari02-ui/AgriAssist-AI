@@ -25,7 +25,7 @@
 <script>
 async function loadMarket() {
 
-    const response = await fetch("http://localhost:5000/api/market");
+    const response = await fetch("https://agriassist-backend-dxtr.onrender.com/api/market");
     const markets = await response.json();
 
     const marketList = document.getElementById("marketList");
