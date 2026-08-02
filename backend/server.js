@@ -10,6 +10,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 const authLimiter = require("./middleware/rateLimiter");
 const aiRoutes = require("./routes/aiRoutes");
 const app = express();
+app.set("trust proxy", 1);
 const cropRoutes = require("./routes/cropRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 const schemeRoutes = require("./routes/schemeRoutes");
