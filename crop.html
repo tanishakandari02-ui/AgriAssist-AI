@@ -83,6 +83,25 @@ fetch("https://agriassist-backend-dxtr.onrender.com/api/profile", {
 
     <label>Symptoms</label><br>
     <textarea id="symptoms" rows="5" placeholder="Enter crop symptoms"></textarea>
+    <br><br>
+
+<label>📷 Upload Plant Image (Optional)</label><br>
+
+<input
+type="file"
+id="plantImage"
+accept="image/*">
+
+<br><br>
+
+<img
+id="preview"
+style="
+display:none;
+width:250px;
+border-radius:10px;
+border:2px solid #28a745;
+">
 
     <br><br>
 
@@ -249,20 +268,24 @@ async function analyzeCrop() {
 
     try {
 
-        const response = await fetch("https://agriassist-backend-dxtr.onrender.com/api/ai/disease", {
+        const formData = new FormData();
 
-            method: "POST",
+formData.append("crop", crop);
+formData.append("symptoms", symptoms);
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+const image = document.getElementById("plantImage").files[0];
 
-            body: JSON.stringify({
-                crop,
-                symptoms
-            })
+if (image) {
+    formData.append("image", image);
+}
 
-        });
+const response = await fetch(
+    "https://agriassist-backend-dxtr.onrender.com/api/ai/disease",
+    {
+        method: "POST",
+        body: formData
+    }
+);
 
         const data = await response.json();
 

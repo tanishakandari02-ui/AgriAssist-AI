@@ -28,6 +28,53 @@
         <p>Improve air circulation and use suitable fungicides.</p>
     </div>
 
+    <hr>
+
+<h2>🤖 AI Plant Disease Detection</h2>
+
+<label>Crop Name</label><br>
+<input
+type="text"
+id="crop"
+placeholder="e.g. Tomato">
+
+<br><br>
+
+<label>Symptoms (Optional)</label><br>
+<textarea
+id="symptoms"
+rows="4"
+placeholder="Describe the symptoms"></textarea>
+
+<br><br>
+
+<label>Upload Plant Image</label><br>
+
+<input
+type="file"
+id="plantImage"
+accept="image/*">
+
+<br><br>
+
+<img
+id="preview"
+style="
+display:none;
+width:250px;
+border-radius:10px;
+border:2px solid green;
+">
+
+<br><br>
+
+<button onclick="analyzeDisease()">
+Analyze Disease
+</button>
+
+<div id="result"></div>
+
+
     <br>
 
     <a href="homepage.html">
