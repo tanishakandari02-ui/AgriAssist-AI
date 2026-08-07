@@ -2,7 +2,11 @@
 
 ## Project Overview
 
-AgriAssist AI is a smart agriculture web application that helps farmers with crop information, weather updates, government schemes, market prices, secure authentication, and AI-powered crop disease detection.
+AgriAssist AI is a smart agriculture web application designed to help farmers access useful agricultural information in one place.
+
+The application provides crop management, weather updates, government schemes, market information, secure authentication, and AI-powered crop disease detection.
+
+The AI feature allows users to enter a crop name and symptoms and optionally upload a plant image. The application sends the information to the backend, where Google Gemini AI analyzes the input and provides possible disease, cause, treatment, and prevention suggestions.
 
 ---
 
@@ -11,104 +15,106 @@ AgriAssist AI is a smart agriculture web application that helps farmers with cro
 - User Registration
 - User Login
 - Google OAuth Login
-- Crop Information
+- JWT-based Authentication
+- Crop Management
+- Add, Edit and Delete Crops
 - Weather Updates
 - Government Schemes
 - Market Prices
 - AI Crop Disease Detection
-- Responsive Design
+- Plant Image Upload
+- AI-generated Disease Analysis
+- Responsive Web Interface
 
 ---
 
-## Tech Stack
+## 🤖 AI Crop Disease Detection
+
+The AI disease detection feature uses the Google Gemini API.
+
+Users can provide:
+
+- Crop name
+- Crop symptoms
+- Optional plant image
+
+The backend processes the request and sends the information to Gemini AI.
+
+The AI provides:
+
+1. Possible Disease
+2. Cause
+3. Treatment
+4. Prevention
+
+The Gemini API key is stored securely in the backend `.env` file and is not exposed in the frontend.
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
+
 - HTML
 - CSS
 - JavaScript
 
 ### Backend
+
 - Node.js
 - Express.js
 
 ### Database
-- PostgreSQL (Prisma)
+
+- PostgreSQL
+- Prisma ORM
 
 ### Authentication
+
 - JWT
 - Google OAuth
+- Passport.js
+- Express Session
 
 ### AI
+
 - Google Gemini API
+- `@google/genai`
+
+### Image Upload
+
+- Multer
+
+### Deployment
+
+- Vercel – Frontend
+- Render – Backend
 
 ---
 
-## Live Demo
+## 📁 Project Structure
 
-https://agri-assist-ai-nine.vercel.app
-
----
-
-## Backend URL
-
-https://agriassist-backend-dxtr.onrender.com
-
----
-
-## GitHub Repository
-
-https://github.com/tanishakandari02-ui/AgriAssist-AI
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/tanishakandari02-ui/AgriAssist-AI
-
-cd AgriAssist-AI
-
-npm install
-
-npm start
-```
-
----
-
-## Known Limitations
-
-- Render free tier sleeps after inactivity.
-- First request may take around 30–60 seconds.
-
----
-
-## Future Improvements
-
-- Voice Assistant
-- Crop Recommendation
-- Farmer Community
-- Mobile Application
-
----
-
-## Author
-
-Developed during the **TBI-GEU Internship Program**.
-
-## 📸 Screenshots
-
-### Homepage
-
-![Homepage](screenshots/homepage.png)
-
-### Login
-
-![Login](screenshots/login.png)
-
-### Dashboard
-
-![Dashboard](screenshots/dashboard.png)
-
-### Crop Management
-
-![Crop](screenshots/crop.png)
+```text
+AgriAssist-AI/
+│
+├── backend/
+│   ├── routes/
+│   ├── middleware/
+│   ├── config/
+│   ├── server.js
+│   └── package.json
+│
+├── homepage.html
+├── login.html
+├── crop.html
+├── weather.html
+├── scheme.html
+├── market.html
+├── style.css
+├── README.md
+│
+└── screenshorts/
+    ├── dashboard.png
+    ├── crop managment.png
+    ├── crop added.png
+    └── AI crop disease detection.png
