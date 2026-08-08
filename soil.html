@@ -1,42 +1,376 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Soil Health Tips</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriAssist AI - Soil Health</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f8f3;
+            color: #333;
+        }
+
+        .header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .assistant {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .assistant h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .tips-btn {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .tips-btn:hover {
+            background: #1b5e20;
+        }
+
+        #tipsResult {
+            margin-top: 25px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+        }
+
+        .tip-card h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .general-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .general-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+        }
+
+        .general-card h3 {
+            color: #2e7d32;
+        }
+
+        .warning {
+            color: #666;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
-
-    <h1>🌱 Soil Health Tips</h1>
-
-    <div class="crop-card">
-        <h3>Soil Testing</h3>
-        <p>Regular soil testing helps identify nutrient deficiencies.</p>
+    <div class="header">
+        <h1>🌱 AgriAssist AI</h1>
+        <p>Smart Soil Health Guidance for Farmers</p>
     </div>
 
-    <div class="crop-card">
-        <h3>Organic Fertilizers</h3>
-        <p>Use compost and organic manure to improve soil fertility.</p>
+    <div class="container">
+
+        <div class="assistant">
+
+            <h2>🤖 Soil Health Assistant</h2>
+
+            <p>
+                Select your soil type, crop and main soil concern to get
+                suitable soil health tips.
+            </p>
+
+            <div class="form-group">
+                <label for="soilType">Soil Type</label>
+
+                <select id="soilType">
+                    <option value="loamy">Loamy Soil</option>
+                    <option value="clayey">Clayey Soil</option>
+                    <option value="sandy">Sandy Soil</option>
+                    <option value="black">Black Soil</option>
+                    <option value="red">Red Soil</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="crop">Crop</label>
+
+                <select id="crop">
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                    <option value="maize">Maize</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="problem">Main Soil Concern</label>
+
+                <select id="problem">
+                    <option value="fertility">Low Soil Fertility</option>
+                    <option value="water">Water Management</option>
+                    <option value="nutrients">Nutrient Deficiency</option>
+                    <option value="erosion">Soil Erosion</option>
+                    <option value="general">General Soil Health</option>
+                </select>
+            </div>
+
+            <button class="tips-btn" onclick="getSoilTips()">
+                🌱 Get Soil Health Tips
+            </button>
+
+            <div id="tipsResult"></div>
+
+        </div>
+
+
+        <h2>🌿 General Soil Health Tips</h2>
+
+        <div class="general-tips">
+
+            <div class="general-card">
+                <h3>🧪 Soil Testing</h3>
+                <p>
+                    Test soil regularly to understand nutrient levels
+                    and soil properties.
+                </p>
+            </div>
+
+            <div class="general-card">
+                <h3>🌱 Organic Matter</h3>
+                <p>
+                    Use suitable organic matter such as compost or
+                    well-decomposed manure.
+                </p>
+            </div>
+
+            <div class="general-card">
+                <h3>🔄 Crop Rotation</h3>
+                <p>
+                    Rotate crops where suitable to support soil health
+                    and reduce pest pressure.
+                </p>
+            </div>
+
+            <div class="general-card">
+                <h3>💧 Water Management</h3>
+                <p>
+                    Avoid unnecessary irrigation and maintain suitable
+                    soil moisture for the crop.
+                </p>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="crop-card">
-        <h3>Crop Rotation</h3>
-        <p>Rotate crops to maintain soil nutrients and reduce pests.</p>
-    </div>
 
-    <div class="crop-card">
-        <h3>Water Management</h3>
-        <p>Avoid over-irrigation to prevent soil erosion and nutrient loss.</p>
-    </div>
+    <button class="back-btn" onclick="window.location.href='homepage.html'">
+        🏠 Back to Home
+    </button>
 
-    <br>
 
-    <a href="homepage.html">
-        <button>🏠 Back to Home</button>
-    </a>
+    <script>
 
-</div>
+        function getSoilTips() {
+
+            const soilType =
+                document.getElementById("soilType").value;
+
+            const crop =
+                document.getElementById("crop").value;
+
+            const problem =
+                document.getElementById("problem").value;
+
+            const result =
+                document.getElementById("tipsResult");
+
+            let tips = [];
+
+            if (problem === "fertility") {
+
+                tips.push(
+                    "Consider soil testing before making major fertilizer decisions."
+                );
+
+                tips.push(
+                    "Maintain suitable organic matter through appropriate compost or well-decomposed manure."
+                );
+
+                tips.push(
+                    "Use fertilizers according to soil-test results and crop requirements."
+                );
+
+            }
+
+            else if (problem === "water") {
+
+                tips.push(
+                    "Avoid unnecessary irrigation and waterlogging."
+                );
+
+                tips.push(
+                    "Maintain suitable soil moisture according to the crop and soil type."
+                );
+
+                tips.push(
+                    "Good drainage is especially important where water tends to accumulate."
+                );
+
+            }
+
+            else if (problem === "nutrients") {
+
+                tips.push(
+                    "Consider a soil test to identify possible nutrient deficiencies."
+                );
+
+                tips.push(
+                    "Use balanced nutrients based on soil-test results and crop requirements."
+                );
+
+                tips.push(
+                    "Avoid excessive fertilizer application."
+                );
+
+            }
+
+            else if (problem === "erosion") {
+
+                tips.push(
+                    "Maintain suitable soil cover wherever possible."
+                );
+
+                tips.push(
+                    "Use appropriate erosion-control practices for your field conditions."
+                );
+
+                tips.push(
+                    "Avoid leaving soil exposed for long periods where erosion risk is high."
+                );
+
+            }
+
+            else {
+
+                tips.push(
+                    "Test your soil periodically to understand its condition."
+                );
+
+                tips.push(
+                    "Maintain suitable organic matter and avoid excessive fertilizer use."
+                );
+
+                tips.push(
+                    "Use crop rotation and appropriate water management practices."
+                );
+
+            }
+
+
+            result.innerHTML = `
+                <div class="tip-card">
+
+                    <h3>🌱 Recommended Soil Tips</h3>
+
+                    <p>
+                        <strong>Soil:</strong> ${soilType}
+                    </p>
+
+                    <p>
+                        <strong>Crop:</strong> ${crop}
+                    </p>
+
+                    <ul>
+                        ${tips.map(tip => `<li>${tip}</li>`).join("")}
+                    </ul>
+
+                    <p class="warning">
+                        ⚠️ These are general educational tips.
+                        For fertilizer application and nutrient treatment,
+                        use a soil test and follow qualified agricultural
+                        recommendations.
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+    </script>
 
 </body>
 </html>

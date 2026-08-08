@@ -1,60 +1,725 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>About Agri-Allied</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About AgriAssist AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8f3;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #1b5e20,
+                #43a047
+            );
+
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin: 0 0 12px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+
+        /* INTRO */
+
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .intro p {
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.7;
+            color: #555;
+        }
+
+
+        /* FEATURE GRID */
+
+        .section-title {
+            text-align: center;
+            color: #2e7d32;
+            margin: 35px 0 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 20px;
+        }
+
+
+        /* FEATURE CARD */
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+        }
+
+        .feature-card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+
+        /* AI SECTION */
+
+        .ai-section {
+            margin-top: 35px;
+            background: linear-gradient(
+                135deg,
+                #e8f5e9,
+                #f1f8e9
+            );
+
+            padding: 35px;
+            border-radius: 18px;
+            border: 1px solid #c8e6c9;
+        }
+
+        .ai-section h2 {
+            color: #1b5e20;
+            margin-top: 0;
+        }
+
+        .ai-list {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .ai-item {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .ai-item strong {
+            color: #2e7d32;
+        }
+
+
+        /* MISSION */
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .mission-card h3 {
+            color: #2e7d32;
+        }
+
+        .mission-card p {
+            line-height: 1.7;
+            color: #555;
+        }
+
+
+        /* TECH STACK */
+
+        .tech {
+            margin-top: 35px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .tech h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+
+        /* DISCLAIMER */
+
+        .disclaimer {
+            margin-top: 30px;
+            background: #fff8e1;
+            border-left: 5px solid #f9a825;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .disclaimer h3 {
+            margin-top: 0;
+            color: #8d6e00;
+        }
+
+        .disclaimer p {
+            line-height: 1.6;
+            color: #665500;
+        }
+
+
+        /* BUTTON */
+
+        .back-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .back-btn {
+            padding: 13px 28px;
+            border: none;
+            border-radius: 9px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #1b5e20;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .intro,
+            .ai-section,
+            .tech {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<div class="container">
 
-    <h1>ℹ️ About Agri-Allied</h1>
+    <!-- HERO -->
 
-    <div class="crop-card">
-        <h3>Our Mission</h3>
+    <section class="hero">
+
+        <h1>🌾 About AgriAssist AI</h1>
+
         <p>
-            Agri-Allied is designed to help farmers access important
-            agricultural information in one place. Our goal is to support
-            farmers with crop guidance, weather updates, government schemes,
-            and farming resources.
+            A smart agricultural assistance platform designed
+            to help farmers access useful information and
+            AI-powered crop guidance in one place.
         </p>
+
+    </section>
+
+
+    <div class="container">
+
+
+        <!-- INTRO -->
+
+        <div class="intro">
+
+            <h2>
+                🌱 Smart Agriculture with AI
+            </h2>
+
+            <p>
+                AgriAssist AI combines modern web technology
+                and Artificial Intelligence to make agricultural
+                information easier to access. Farmers can explore
+                crop information, weather updates, government
+                schemes, market information, soil health tips and
+                AI-powered crop disease guidance from one platform.
+            </p>
+
+        </div>
+
+
+        <!-- AI FEATURE -->
+
+        <h2 class="section-title">
+            🤖 How AI Helps Farmers
+        </h2>
+
+
+        <div class="ai-section">
+
+            <h2>
+                🧠 AI Crop Disease Detection
+            </h2>
+
+            <p>
+                The AI feature helps analyze crop symptoms and
+                provides possible disease information along with
+                causes, treatment suggestions and prevention tips.
+            </p>
+
+
+            <div class="ai-list">
+
+                <div class="ai-item">
+
+                    <strong>
+                        🌱 Crop Analysis
+                    </strong>
+
+                    <p>
+                        Enter the crop name and describe visible
+                        symptoms for AI analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="ai-item">
+
+                    <strong>
+                        🔎 Disease Detection
+                    </strong>
+
+                    <p>
+                        AI identifies possible crop diseases
+                        based on the provided symptoms.
+                    </p>
+
+                </div>
+
+
+                <div class="ai-item">
+
+                    <strong>
+                        💡 Treatment Guidance
+                    </strong>
+
+                    <p>
+                        Get general treatment and management
+                        suggestions for the identified problem.
+                    </p>
+
+                </div>
+
+
+                <div class="ai-item">
+
+                    <strong>
+                        🛡️ Prevention
+                    </strong>
+
+                    <p>
+                        Receive preventive practices to help
+                        reduce future crop disease risks.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FEATURES -->
+
+        <h2 class="section-title">
+            🚜 What AgriAssist AI Provides
+        </h2>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🌾
+                </div>
+
+                <h3>
+                    Crop Information
+                </h3>
+
+                <p>
+                    Access useful crop information including
+                    crop season and descriptions to support
+                    better farming decisions.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🌦️
+                </div>
+
+                <h3>
+                    Weather Updates
+                </h3>
+
+                <p>
+                    Check weather information that can help
+                    farmers plan agricultural activities.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🏛️
+                </div>
+
+                <h3>
+                    Government Schemes
+                </h3>
+
+                <p>
+                    Find useful government agricultural schemes
+                    and information in an accessible format.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Market Information
+                </h3>
+
+                <p>
+                    Explore crop market-price information to
+                    understand current agricultural market trends.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Soil Health
+                </h3>
+
+                <p>
+                    Learn useful practices such as soil testing,
+                    organic fertilization, crop rotation and
+                    water management.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Secure Authentication
+                </h3>
+
+                <p>
+                    User authentication helps protect user
+                    accounts and personalized agricultural data.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- MISSION -->
+
+        <h2 class="section-title">
+            🎯 Our Mission & Vision
+        </h2>
+
+
+        <div class="mission-grid">
+
+
+            <div class="mission-card">
+
+                <h3>
+                    🎯 Our Mission
+                </h3>
+
+                <p>
+                    To make agricultural information smarter,
+                    simpler and more accessible by bringing
+                    useful farming resources and AI-powered
+                    assistance together on one platform.
+                </p>
+
+            </div>
+
+
+            <div class="mission-card">
+
+                <h3>
+                    🌍 Our Vision
+                </h3>
+
+                <p>
+                    To build a farmer-friendly digital platform
+                    where technology and Artificial Intelligence
+                    can support better agricultural decision-making.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- TECHNOLOGY -->
+
+        <div class="tech">
+
+            <h2>
+                💻 Technology Behind AgriAssist AI
+            </h2>
+
+            <p>
+                The platform is developed using modern web
+                technologies and AI services.
+            </p>
+
+
+            <div class="tech-tags">
+
+                <span class="tag">
+                    HTML
+                </span>
+
+                <span class="tag">
+                    CSS
+                </span>
+
+                <span class="tag">
+                    JavaScript
+                </span>
+
+                <span class="tag">
+                    Node.js
+                </span>
+
+                <span class="tag">
+                    Express.js
+                </span>
+
+                <span class="tag">
+                    PostgreSQL
+                </span>
+
+                <span class="tag">
+                    Prisma
+                </span>
+
+                <span class="tag">
+                    JWT
+                </span>
+
+                <span class="tag">
+                    Google OAuth
+                </span>
+
+                <span class="tag">
+                    Google Gemini AI
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISCLAIMER -->
+
+        <div class="disclaimer">
+
+            <h3>
+                ⚠️ AI Information Disclaimer
+            </h3>
+
+            <p>
+                AI-generated crop guidance is provided for
+                informational and educational purposes. For
+                serious crop damage or uncertain disease
+                identification, farmers should consult a
+                qualified agricultural expert.
+            </p>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="back-container">
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='homepage.html'"
+            >
+
+                🏠 Back to Home
+
+            </button>
+
+        </div>
+
+
     </div>
 
-    <div class="crop-card">
-        <h3>Our Vision</h3>
+
+    <!-- FOOTER -->
+
+    <footer>
+
         <p>
-            To create a smart and farmer-friendly platform that improves
-            agricultural productivity and helps farmers make informed decisions.
+            🌾 AgriAssist AI
         </p>
-    </div>
 
-    <div class="crop-card">
-        <h3>Services Provided</h3>
-        <ul>
-            <li>🌾 Crop Information</li>
-            <li>🌦 Weather Updates</li>
-            <li>🏛 Government Schemes</li>
-            <li>🛒 Farmer Marketplace</li>
-            <li>🌱 Soil Health Tips</li>
-            <li>🐛 Crop Disease Detection</li>
-        </ul>
-    </div>
-
-    <div class="crop-card">
-        <h3>Project Information</h3>
         <p>
-            Agri-Allied is a web application developed as an agricultural
-            support platform using HTML, CSS, Node.js, Express.js, and MySQL.
+            Smart Agriculture • AI Assistance • Better Decisions
         </p>
-    </div>
 
-    <br>
+    </footer>
 
-    <a href="homepage.html">
-        <button>🏠 Back to Home</button>
-    </a>
-
-</div>
 
 </body>
+
 </html>
